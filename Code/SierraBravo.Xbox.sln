@@ -3,6 +3,14 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SierraBravo.Xbox.Mvc", "SierraBravo.Xbox.Mvc\SierraBravo.Xbox.Mvc.csproj", "{ED43BF1C-D3D5-4588-AE00-B48233B21E9D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SierraBravo.Xbox.Repositories", "SierraBravo.Xbox.Repositories\SierraBravo.Xbox.Repositories.csproj", "{6A8CCFE8-AC9B-42E0-813D-01318A4F2026}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SierraBravo.Xbox.Common", "SierraBravo.Xbox.Common\SierraBravo.Xbox.Common.csproj", "{D71220A8-EC9D-4991-AD5B-C17948C85FDE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SierraBravo.Xbox.Tests", "SierraBravo.Xbox.Tests\SierraBravo.Xbox.Tests.csproj", "{9472D284-B82E-49F6-988D-6B050D140448}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SierraBravo.Xbox.Services", "SierraBravo.Xbox.Services\SierraBravo.Xbox.Services.csproj", "{EBF92837-8375-479C-B12D-EDE598C84944}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +21,22 @@ Global
 		{ED43BF1C-D3D5-4588-AE00-B48233B21E9D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ED43BF1C-D3D5-4588-AE00-B48233B21E9D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ED43BF1C-D3D5-4588-AE00-B48233B21E9D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A8CCFE8-AC9B-42E0-813D-01318A4F2026}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A8CCFE8-AC9B-42E0-813D-01318A4F2026}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A8CCFE8-AC9B-42E0-813D-01318A4F2026}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A8CCFE8-AC9B-42E0-813D-01318A4F2026}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D71220A8-EC9D-4991-AD5B-C17948C85FDE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D71220A8-EC9D-4991-AD5B-C17948C85FDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D71220A8-EC9D-4991-AD5B-C17948C85FDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D71220A8-EC9D-4991-AD5B-C17948C85FDE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9472D284-B82E-49F6-988D-6B050D140448}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9472D284-B82E-49F6-988D-6B050D140448}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9472D284-B82E-49F6-988D-6B050D140448}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9472D284-B82E-49F6-988D-6B050D140448}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EBF92837-8375-479C-B12D-EDE598C84944}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EBF92837-8375-479C-B12D-EDE598C84944}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EBF92837-8375-479C-B12D-EDE598C84944}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EBF92837-8375-479C-B12D-EDE598C84944}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

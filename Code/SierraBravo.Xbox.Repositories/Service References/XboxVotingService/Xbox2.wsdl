@@ -1,0 +1,566 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://xbox2.sierrabravo.net/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://xbox2.sierrabravo.net/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Do some Xbox Voting, yeah baby yeah</wsdl:documentation>
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://xbox2.sierrabravo.net/">
+      <s:element name="SetGotIt">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="apiKey" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetGotItResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="SetGotItResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddVote">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="id" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="apiKey" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddVoteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="AddVoteResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CheckKey">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="apiKey" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CheckKeyResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CheckKeyResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddGame">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="title" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="apiKey" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddGameResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="AddGameResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetGames">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="apiKey" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetGamesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetGamesResult" type="tns:ArrayOfXboxGame" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfXboxGame">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="XboxGame" nillable="true" type="tns:XboxGame" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="XboxGame">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="IpAddress" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Key" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Status" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Title" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Votes" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="VoteTime" type="s:dateTime" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ClearGames">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="apiKey" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ClearGamesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ClearGamesResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="boolean" type="s:boolean" />
+      <s:element name="ArrayOfXboxGame" nillable="true" type="tns:ArrayOfXboxGame" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="SetGotItSoapIn">
+    <wsdl:part name="parameters" element="tns:SetGotIt" />
+  </wsdl:message>
+  <wsdl:message name="SetGotItSoapOut">
+    <wsdl:part name="parameters" element="tns:SetGotItResponse" />
+  </wsdl:message>
+  <wsdl:message name="AddVoteSoapIn">
+    <wsdl:part name="parameters" element="tns:AddVote" />
+  </wsdl:message>
+  <wsdl:message name="AddVoteSoapOut">
+    <wsdl:part name="parameters" element="tns:AddVoteResponse" />
+  </wsdl:message>
+  <wsdl:message name="CheckKeySoapIn">
+    <wsdl:part name="parameters" element="tns:CheckKey" />
+  </wsdl:message>
+  <wsdl:message name="CheckKeySoapOut">
+    <wsdl:part name="parameters" element="tns:CheckKeyResponse" />
+  </wsdl:message>
+  <wsdl:message name="AddGameSoapIn">
+    <wsdl:part name="parameters" element="tns:AddGame" />
+  </wsdl:message>
+  <wsdl:message name="AddGameSoapOut">
+    <wsdl:part name="parameters" element="tns:AddGameResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetGamesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetGames" />
+  </wsdl:message>
+  <wsdl:message name="GetGamesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetGamesResponse" />
+  </wsdl:message>
+  <wsdl:message name="ClearGamesSoapIn">
+    <wsdl:part name="parameters" element="tns:ClearGames" />
+  </wsdl:message>
+  <wsdl:message name="ClearGamesSoapOut">
+    <wsdl:part name="parameters" element="tns:ClearGamesResponse" />
+  </wsdl:message>
+  <wsdl:message name="SetGotItHttpGetIn">
+    <wsdl:part name="id" type="s:string" />
+    <wsdl:part name="apiKey" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SetGotItHttpGetOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="AddVoteHttpGetIn">
+    <wsdl:part name="id" type="s:string" />
+    <wsdl:part name="apiKey" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="AddVoteHttpGetOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="CheckKeyHttpGetIn">
+    <wsdl:part name="apiKey" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CheckKeyHttpGetOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="AddGameHttpGetIn">
+    <wsdl:part name="title" type="s:string" />
+    <wsdl:part name="apiKey" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="AddGameHttpGetOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="GetGamesHttpGetIn">
+    <wsdl:part name="apiKey" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetGamesHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfXboxGame" />
+  </wsdl:message>
+  <wsdl:message name="ClearGamesHttpGetIn">
+    <wsdl:part name="apiKey" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ClearGamesHttpGetOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="SetGotItHttpPostIn">
+    <wsdl:part name="id" type="s:string" />
+    <wsdl:part name="apiKey" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SetGotItHttpPostOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="AddVoteHttpPostIn">
+    <wsdl:part name="id" type="s:string" />
+    <wsdl:part name="apiKey" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="AddVoteHttpPostOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="CheckKeyHttpPostIn">
+    <wsdl:part name="apiKey" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CheckKeyHttpPostOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="AddGameHttpPostIn">
+    <wsdl:part name="title" type="s:string" />
+    <wsdl:part name="apiKey" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="AddGameHttpPostOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:message name="GetGamesHttpPostIn">
+    <wsdl:part name="apiKey" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetGamesHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfXboxGame" />
+  </wsdl:message>
+  <wsdl:message name="ClearGamesHttpPostIn">
+    <wsdl:part name="apiKey" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ClearGamesHttpPostOut">
+    <wsdl:part name="Body" element="tns:boolean" />
+  </wsdl:message>
+  <wsdl:portType name="XboxVotingServiceSoap">
+    <wsdl:operation name="SetGotIt">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Changes the specified game id's status to gotit</wsdl:documentation>
+      <wsdl:input message="tns:SetGotItSoapIn" />
+      <wsdl:output message="tns:SetGotItSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddVote">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Adds a vote for the specified game id</wsdl:documentation>
+      <wsdl:input message="tns:AddVoteSoapIn" />
+      <wsdl:output message="tns:AddVoteSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckKey">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Checks your API Key's key's validity</wsdl:documentation>
+      <wsdl:input message="tns:CheckKeySoapIn" />
+      <wsdl:output message="tns:CheckKeySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddGame">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Adds a title to the xbox list</wsdl:documentation>
+      <wsdl:input message="tns:AddGameSoapIn" />
+      <wsdl:output message="tns:AddGameSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetGames">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a list of votes as a generic list of type XboxVote</wsdl:documentation>
+      <wsdl:input message="tns:GetGamesSoapIn" />
+      <wsdl:output message="tns:GetGamesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ClearGames">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Clears all the votes for the specified developer key</wsdl:documentation>
+      <wsdl:input message="tns:ClearGamesSoapIn" />
+      <wsdl:output message="tns:ClearGamesSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="XboxVotingServiceHttpGet">
+    <wsdl:operation name="SetGotIt">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Changes the specified game id's status to gotit</wsdl:documentation>
+      <wsdl:input message="tns:SetGotItHttpGetIn" />
+      <wsdl:output message="tns:SetGotItHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddVote">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Adds a vote for the specified game id</wsdl:documentation>
+      <wsdl:input message="tns:AddVoteHttpGetIn" />
+      <wsdl:output message="tns:AddVoteHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckKey">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Checks your API Key's key's validity</wsdl:documentation>
+      <wsdl:input message="tns:CheckKeyHttpGetIn" />
+      <wsdl:output message="tns:CheckKeyHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddGame">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Adds a title to the xbox list</wsdl:documentation>
+      <wsdl:input message="tns:AddGameHttpGetIn" />
+      <wsdl:output message="tns:AddGameHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetGames">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a list of votes as a generic list of type XboxVote</wsdl:documentation>
+      <wsdl:input message="tns:GetGamesHttpGetIn" />
+      <wsdl:output message="tns:GetGamesHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ClearGames">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Clears all the votes for the specified developer key</wsdl:documentation>
+      <wsdl:input message="tns:ClearGamesHttpGetIn" />
+      <wsdl:output message="tns:ClearGamesHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="XboxVotingServiceHttpPost">
+    <wsdl:operation name="SetGotIt">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Changes the specified game id's status to gotit</wsdl:documentation>
+      <wsdl:input message="tns:SetGotItHttpPostIn" />
+      <wsdl:output message="tns:SetGotItHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddVote">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Adds a vote for the specified game id</wsdl:documentation>
+      <wsdl:input message="tns:AddVoteHttpPostIn" />
+      <wsdl:output message="tns:AddVoteHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckKey">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Checks your API Key's key's validity</wsdl:documentation>
+      <wsdl:input message="tns:CheckKeyHttpPostIn" />
+      <wsdl:output message="tns:CheckKeyHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddGame">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Adds a title to the xbox list</wsdl:documentation>
+      <wsdl:input message="tns:AddGameHttpPostIn" />
+      <wsdl:output message="tns:AddGameHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetGames">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Returns a list of votes as a generic list of type XboxVote</wsdl:documentation>
+      <wsdl:input message="tns:GetGamesHttpPostIn" />
+      <wsdl:output message="tns:GetGamesHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ClearGames">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Clears all the votes for the specified developer key</wsdl:documentation>
+      <wsdl:input message="tns:ClearGamesHttpPostIn" />
+      <wsdl:output message="tns:ClearGamesHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="XboxVotingServiceSoap" type="tns:XboxVotingServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="SetGotIt">
+      <soap:operation soapAction="http://xbox2.sierrabravo.net/SetGotIt" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddVote">
+      <soap:operation soapAction="http://xbox2.sierrabravo.net/AddVote" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckKey">
+      <soap:operation soapAction="http://xbox2.sierrabravo.net/CheckKey" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddGame">
+      <soap:operation soapAction="http://xbox2.sierrabravo.net/AddGame" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGames">
+      <soap:operation soapAction="http://xbox2.sierrabravo.net/GetGames" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ClearGames">
+      <soap:operation soapAction="http://xbox2.sierrabravo.net/ClearGames" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="XboxVotingServiceSoap12" type="tns:XboxVotingServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="SetGotIt">
+      <soap12:operation soapAction="http://xbox2.sierrabravo.net/SetGotIt" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddVote">
+      <soap12:operation soapAction="http://xbox2.sierrabravo.net/AddVote" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckKey">
+      <soap12:operation soapAction="http://xbox2.sierrabravo.net/CheckKey" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddGame">
+      <soap12:operation soapAction="http://xbox2.sierrabravo.net/AddGame" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGames">
+      <soap12:operation soapAction="http://xbox2.sierrabravo.net/GetGames" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ClearGames">
+      <soap12:operation soapAction="http://xbox2.sierrabravo.net/ClearGames" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="XboxVotingServiceHttpGet" type="tns:XboxVotingServiceHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="SetGotIt">
+      <http:operation location="/SetGotIt" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddVote">
+      <http:operation location="/AddVote" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckKey">
+      <http:operation location="/CheckKey" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddGame">
+      <http:operation location="/AddGame" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGames">
+      <http:operation location="/GetGames" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ClearGames">
+      <http:operation location="/ClearGames" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="XboxVotingServiceHttpPost" type="tns:XboxVotingServiceHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="SetGotIt">
+      <http:operation location="/SetGotIt" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddVote">
+      <http:operation location="/AddVote" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckKey">
+      <http:operation location="/CheckKey" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddGame">
+      <http:operation location="/AddGame" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGames">
+      <http:operation location="/GetGames" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ClearGames">
+      <http:operation location="/ClearGames" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="XboxVotingService">
+    <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Do some Xbox Voting, yeah baby yeah</wsdl:documentation>
+    <wsdl:port name="XboxVotingServiceSoap" binding="tns:XboxVotingServiceSoap">
+      <soap:address location="http://xbox2.sierrabravo.net/Xbox2.asmx" />
+    </wsdl:port>
+    <wsdl:port name="XboxVotingServiceSoap12" binding="tns:XboxVotingServiceSoap12">
+      <soap12:address location="http://xbox2.sierrabravo.net/Xbox2.asmx" />
+    </wsdl:port>
+    <wsdl:port name="XboxVotingServiceHttpGet" binding="tns:XboxVotingServiceHttpGet">
+      <http:address location="http://xbox2.sierrabravo.net/Xbox2.asmx" />
+    </wsdl:port>
+    <wsdl:port name="XboxVotingServiceHttpPost" binding="tns:XboxVotingServiceHttpPost">
+      <http:address location="http://xbox2.sierrabravo.net/Xbox2.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
