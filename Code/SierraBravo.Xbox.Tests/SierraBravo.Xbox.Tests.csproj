@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\XboxVotingRepositoryUnitTests.cs" />
+    <Compile Include="Services\VideoGameVotingServiceUnitTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SierraBravo.Xbox.Common\SierraBravo.Xbox.Common.csproj">
@@ -57,6 +58,10 @@
     <ProjectReference Include="..\SierraBravo.Xbox.Repositories\SierraBravo.Xbox.Repositories.csproj">
       <Project>{6A8CCFE8-AC9B-42E0-813D-01318A4F2026}</Project>
       <Name>SierraBravo.Xbox.Repositories</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SierraBravo.Xbox.Services\SierraBravo.Xbox.Services.csproj">
+      <Project>{EBF92837-8375-479C-B12D-EDE598C84944}</Project>
+      <Name>SierraBravo.Xbox.Services</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

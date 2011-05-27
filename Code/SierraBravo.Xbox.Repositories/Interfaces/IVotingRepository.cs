@@ -33,7 +33,7 @@ namespace SierraBravo.Xbox.Repositories.Interfaces
         /// <summary>
         /// Removes all games from the database.
         /// </summary>
-        /// <returns>True of removing all games succeeded</returns>
+        /// <returns>True if removing all games succeeded</returns>
         bool ClearAllGames();
 
         /// <summary>

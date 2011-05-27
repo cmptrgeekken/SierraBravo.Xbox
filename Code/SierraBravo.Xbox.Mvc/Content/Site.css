@@ -3,7 +3,7 @@ body
     font-size: .85em;
     font-family: "Trebuchet MS", Verdana, Helvetica, Sans-Serif;
     color: #232323;
-    background-color: #fff;
+    background-color: #000;
 }
 
 header,
@@ -11,37 +11,6 @@ footer,
 nav,
 section {
     display: block;
-}
-
-/* Styles for basic forms
------------------------------------------------------------*/
-
-fieldset 
-{
-    border:1px solid #ddd;
-    padding:0 1.4em 1.4em 1.4em;
-    margin:0 0 1.5em 0;
-}
-
-legend 
-{
-    font-size:1.2em;
-    font-weight: bold;
-}
-
-textarea 
-{
-    min-height: 75px;
-}
-
-.editor-label 
-{
-    margin: 1em 0 0 0;
-}
-
-.editor-field 
-{
-    margin:0.5em 0 0 0;
 }
 
 
@@ -63,13 +32,135 @@ textarea
     background-color: #ffeeee;
 }
 
-.validation-summary-errors
+
+.message-success,.message-error,.field-validation-error
 {
-    font-weight: bold;
-    color: #ff0000;
+    padding: 0.5em;
+    width: 400px;
+    margin: 0 auto;
 }
 
-.validation-summary-valid
+.message-success 
+{ 
+    background-color: #DFF2BF; 
+    color: #4F8A10;
+    border: 1px solid #4F8A10;
+}
+
+.message-error,.field-validation-error
 {
-    display: none;
+    background-color: #FFBABA; 
+    color: #D8000C;
+    border: 1px solid #D8000C;
+}
+
+h1,h2,h3,h4,h5
+{
+    color: #91C83D;
+}
+
+#wrapper
+{
+    margin: 0 auto;
+    width: 800px;
+    text-align: center;
+    background-color: #9C9EA1;
+    border: 2px solid #000;
+}
+
+#header
+{
+    font-weight: bold;
+    font-size: 2em;
+    text-align: left;
+    padding: 0.25em 0.5em;
+}
+
+#header h1
+{
+    font-size: 1.5em;
+}
+
+
+#navigation
+{
+    background-color: #444;
+}
+
+#navigation ul
+{
+    margin: 0;
+    padding: 0;
+}
+
+#navigation ul li
+{
+    list-style-type: none;
+    display: inline;
+}
+
+#navigation ul li a
+{
+    display: block;
+    float: left;
+    padding: 0.5em 1em;
+    color: #FFF;
+    text-decoration: none;
+    font-weight: bold;
+    border-right: 1px solid #FFF;
+}
+
+#navigation ul li a:hover
+{
+    background-color: #CCC;
+    color: #666;
+}
+
+#main
+{
+    clear: left;
+    margin-bottom: 5em;
+    padding: 1em;
+}
+
+#left-column,#right-column
+{
+    margin: 0;
+    width: 50%;
+    float: left;
+    text-align: left;
+}
+
+.game-owned,.game-wanted
+{
+    margin-right: 10px;
+    padding: 0 3px;
+    /*border: 1px solid #000;*/
+}
+
+#games-wanted a
+{
+    text-decoration: none; 
+    color: #00F;
+}
+
+#games-wanted .row-alt,#games-owned .row-alt
+{
+    background-color: #FFF;
+}
+
+#games-wanted .row,#games-owned .row
+{
+    background-color: #CCC;
+}
+
+.no-games
+{
+    font-style: italic;
+}
+
+#footer
+{
+    text-align: right;
+    padding: 0.5em 1em;
 }

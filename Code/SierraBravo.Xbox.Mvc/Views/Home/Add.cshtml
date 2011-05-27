@@ -1,0 +1,17 @@
+﻿@model SierraBravo.Xbox.Mvc.Models.VideoGameAddModel
+@{
+    ViewBag.Title = "Add Game";
+}
+<p>Use this form to add a new title. Once a title is added, the only way to remove it is to clear the entire database.</p>
+@using(Html.BeginForm()){
+    @Html.ValidationMessageFor(m => m.Title)
+    <p>
+        <b>@Html.LabelFor(m => m.Title)<text>:</text></b>
+        @Html.TextBoxFor(m => m.Title)
+
+        <input type="submit" value="Add Game" />
+    </p>
+    <script type="text/javascript">
+        $("#Title").focus();
+    </script>
+}

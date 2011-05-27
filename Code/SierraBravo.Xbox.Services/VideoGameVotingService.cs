@@ -1,21 +1,32 @@
-﻿using System;
+﻿/* This program is free software. It comes without any warranty, to
+ * the extent permitted by applicable law. You can redistribute it
+ * and/or modify it under the terms of the Do What The Fuck You Want
+ * To Public License, Version 2, as published by Sam Hocevar. See
+ * http://sam.zoy.org/wtfpl/COPYING for more details. */
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using SierraBravo.Xbox.Common.DTOs;
 using SierraBravo.Xbox.Repositories;
 using SierraBravo.Xbox.Repositories.Interfaces;
+using SierraBravo.Xbox.Services.Interfaces;
 
 namespace SierraBravo.Xbox.Services
 {
-    public class VideoGameVotingService
+    public class VideoGameVotingService : IVideoGameVotingService
     {
+        /// <summary>
+        /// As there is no concept of transactions with the web service routine,
+        /// to ensure that the business logic is followed, all transactions that
+        /// may change the state of the database will be wrapped in lock statements.
+        /// </summary>
+        /// <remarks>Double-checked locking is not used for performance reasons.</remarks>
+        private static readonly object LockObj = new object();
+
         private readonly IVotingRepository _votingRepository;
-        private static readonly object _lockObj = new object();
 
         public VideoGameVotingService() : this(new XboxVotingRepository())
         {
-            
         }
 
         public VideoGameVotingService(IVotingRepository votingRepository)
@@ -36,11 +47,11 @@ namespace SierraBravo.Xbox.Services
         /// <returns>True if the title does not exist and it is added successfully</returns>
         public bool AddGame(string gameTitle)
         {
+            // Do not allow empty titles.
             if (String.IsNullOrEmpty(gameTitle)) return false;
 
             var success = false;
-
-            lock (_lockObj)
+            lock (LockObj)
             {
                 var allGames = GetAllGames();
 
@@ -96,7 +107,7 @@ namespace SierraBravo.Xbox.Services
         public bool MarkGameAsOwned(int gameId)
         {
             var success = false;
-            lock (_lockObj)
+            lock (LockObj)
             {
                 var game = GetGameById(gameId);
 
@@ -117,7 +128,7 @@ namespace SierraBravo.Xbox.Services
         public bool VoteForGame(int gameId)
         {
             var success = false;
-            lock(_lockObj)
+            lock(LockObj)
             {
                 var game = GetGameById(gameId);
             
@@ -127,6 +138,15 @@ namespace SierraBravo.Xbox.Services
                 }
             }
             return success;
+        }
+
+        /// <summary>
+        /// Deletes all games from the repository
+        /// </summary>
+        /// <returns>True if successfully cleared</returns>
+        public bool ClearAllGames()
+        {
+            return _votingRepository.ClearAllGames();
         }
     }
 }

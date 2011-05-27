@@ -110,7 +110,7 @@ namespace SierraBravo.Xbox.Repositories
         /// <summary>
         /// Removes all games from the database.
         /// </summary>
-        /// <returns>True of removing all games succeeded</returns>
+        /// <returns>True if removing all games succeeded</returns>
         /// <exception cref="ArgumentException">Thrown if ApiKey is not valid</exception>
         public bool ClearAllGames()
         {

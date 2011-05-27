@@ -1,0 +1,13 @@
+﻿@{
+    ViewBag.Title = "Clear Database";
+}
+
+<p>Please confirm clearing of database by typing <b>confirm</b> into the box below:</p>
+@using(Html.BeginForm()){
+    @Html.TextBox("txtConfirm")
+    <input type="submit" value="Clear Database" />
+    
+    <script type="text/javascript">
+        $("#txtConfirm").focus();
+    </script>
+}
