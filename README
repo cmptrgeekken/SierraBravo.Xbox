@@ -1,0 +1,27 @@
+Setup Instructions
+------------------
+1) Install ASP.NET MVC3 from http://www.asp.net/mvc/mvc3
+2) Open Code/SierraBravo.Xbox.sln in Visual Studio 2010
+3) When prompted to add a virtual directory for http://localhost/SierraBravo.Xbox, click 'Yes'. If this fails, please add the virtual directory manually.
+4) Build the solution
+5) Open http://localhost/SierraBravo.Xbox
+   - If presented with security errors, ensure that the application pool user has access to the SierraBravo.Xbox.Mvc directory
+6) Interact with the application
+
+Configuration Parameters
+------------------------
+Web.config contains a couple parameters that the user can tweak to their liking:
+1) VideoGameVotingSystem.MaxActionsPerDay (Default: 1)
+   - Adjusting this setting adjusts the number of actions a user is able to take each day.
+2) VideoGameVotingSystem.InvalidActionDays (Default: Saturday,Sunday)
+   - Determines which days voting or adding of games cannot be performed. Separate days of week with a comma. Full day names are required.
+3) Web Service
+   - If you have an API key for the web service, you can add the following to the <components> section of the <castle> configuration section. Make sure that it is above the "LocalXboxVotingRepository" declaration:
+   
+<component id="XboxVotingRepository"
+         type="SierraBravo.Xbox.Repositories.XboxVotingRepository,SierraBravo.Xbox.Repositories"
+         service="SierraBravo.Xbox.Repositories.Interfaces.IVotingRepository,SierraBravo.Xbox.Repositories">
+<parameters>
+  <apiKey>USER_API_KEY</apiKey>
+</parameters>
+</component>
