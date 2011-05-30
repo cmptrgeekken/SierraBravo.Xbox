@@ -16,8 +16,6 @@ namespace SierraBravo.Xbox.Mvc.Controllers
     [SessionState(SessionStateBehavior.Required)]
     public class HomeController : BaseController<IVideoGameVotingService>
     {       
-        //
-        // GET: /Home/
         public ActionResult Index()
         {
             var allGames = ControllerService.GetAllGames().OrderByDescending(g => g.NumberOfVotes);
@@ -51,8 +49,11 @@ namespace SierraBravo.Xbox.Mvc.Controllers
                     result = RedirectToAction("Index");
                 }else
                 {
-                    ModelState.AddModelError("Title", "Title already exists.");
+                    SetError("Title already exists.");
                 }
+            }else
+            {
+                SetError("Title improperly formatted.");
             }
 
             return result ?? View(model);

@@ -42,6 +42,10 @@ namespace SierraBravo.Xbox.Mvc.Filters
             }
         }
 
+        /// <summary>
+        /// Increments the action counter if the action this attribute is associated with was successful.
+        /// </summary>
+        /// <param name="filterContext">The filter context.</param>
         public override void OnActionExecuted(ActionExecutedContext filterContext)
         {
             base.OnActionExecuted(filterContext);

@@ -2,17 +2,16 @@
 @{
     ViewBag.Title = "Add Game";
 }
-<p>Use this form to add a new title. Once a title is added, the only way to remove it is to clear the entire database.</p>
-<p><i>Note: Adding a video game costs <b>1</b> action for the current day.</i></p>
-@using(Html.BeginForm()){
-    @Html.ValidationMessageFor(m => m.Title)
-    <p>
-        <b>@Html.LabelFor(m => m.Title):</b>
-        @Html.TextBoxFor(m => m.Title)
+        <p>Use this form to add a new title. Once a title is added, the only way to remove it is to clear the entire database.</p>
+        <p><i>Note: Adding a video game costs <b>1</b> action for the current day.</i></p>
+    @using(Html.BeginForm()){
+        <p>
+            <b>@Html.LabelFor(m => m.Title):</b>
+            @Html.TextBoxFor(m => m.Title)
 
-        <input type="submit" value="Add Game" />
-    </p>
-    <script type="text/javascript">
-        $("#Title").focus();
-    </script>
-}
+            <input type="submit" value="Add Game" />
+        </p>
+        <script type="text/javascript">
+            $("#Title").focus();
+        </script>
+    }

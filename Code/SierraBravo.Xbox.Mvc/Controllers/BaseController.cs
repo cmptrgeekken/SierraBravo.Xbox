@@ -8,6 +8,12 @@ using SierraBravo.Xbox.Mvc.Classes;
 
 namespace SierraBravo.Xbox.Mvc.Controllers
 {
+    /// <summary>
+    /// Base controller that would allow for future expansion. Implementing this
+    /// class with a corresponding service interface will automatically resolve
+    /// the interface using IoC logic.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public class BaseController<T> : Controller
     {
         private const string STATUS_COOKIE = "VGVS_LASTACTION_TIME";
@@ -24,6 +30,12 @@ namespace SierraBravo.Xbox.Mvc.Controllers
             ControllerService = Container.Resolve<T>();
         }
 
+        /// <summary>
+        /// Determine the read-only status of the site. If the day corresponds to an invalid day of the week
+        /// or the user has performed more than the allotted number of actions for the day, the site will
+        /// be placed in read-only mode.
+        /// </summary>
+        /// <param name="requestContext">Current request context.</param>
         protected override void Initialize(System.Web.Routing.RequestContext requestContext)
         {
             base.Initialize(requestContext);
