@@ -8,7 +8,6 @@ using System.Linq;
 using NUnit.Framework;
 using Rhino.Mocks;
 using SierraBravo.Xbox.Common.DTOs;
-using SierraBravo.Xbox.Common.Enums;
 using SierraBravo.Xbox.Repositories.Interfaces;
 using SierraBravo.Xbox.Services;
 
@@ -35,16 +34,14 @@ namespace SierraBravo.Xbox.Tests.Services
                                      Id = 1,
                                      Title = "test",
                                      NumberOfVotes = 1,
-                                     IsOwned = false,
-                                     GameType = VideoGameType.Xbox
+                                     IsOwned = false
                                  },
                              new VideoGame
                                  {
                                      Id = 2,
                                      Title = "test2",
                                      NumberOfVotes = 1,
-                                     IsOwned = true,
-                                     GameType = VideoGameType.Xbox
+                                     IsOwned = true
                                  }
                          };
         }

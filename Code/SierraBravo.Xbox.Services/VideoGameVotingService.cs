@@ -24,11 +24,7 @@ namespace SierraBravo.Xbox.Services
         private static readonly object LockObj = new object();
 
         private readonly IVotingRepository _votingRepository;
-
-        public VideoGameVotingService() : this(new XboxVotingRepository())
-        {
-        }
-
+        
         public VideoGameVotingService(IVotingRepository votingRepository)
         {
             _votingRepository = votingRepository;

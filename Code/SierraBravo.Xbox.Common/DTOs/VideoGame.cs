@@ -3,8 +3,6 @@
  * and/or modify it under the terms of the Do What The Fuck You Want
  * To Public License, Version 2, as published by Sam Hocevar. See
  * http://sam.zoy.org/wtfpl/COPYING for more details. */
-using SierraBravo.Xbox.Common.Enums;
-
 namespace SierraBravo.Xbox.Common.DTOs
 {
     public class VideoGame
@@ -13,6 +11,5 @@ namespace SierraBravo.Xbox.Common.DTOs
         public string Title { get; set; }
         public int NumberOfVotes { get; set; }
         public bool IsOwned { get; set; }
-        public VideoGameType GameType { get; set; }
     }
 }

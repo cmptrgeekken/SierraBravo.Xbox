@@ -2,9 +2,9 @@
 @{
     ViewBag.Title = "Cast Vote";
 }
-
-<p>Click <b>Cast Vote</b> to confirm vote casting for game <b>@Model.Title</b></p>
-@using(Html.BeginForm()){
-    @Html.HiddenFor(m => m.Id)
-    <input type="submit" value="Cast Vote" />
-}
+        <p>Click <b>Cast Vote</b> to confirm vote casting for game <b>@Model.Title</b></p>
+        <p><i>Note: Voting for a game costs <b>1</b> action for the current day.</i></p>
+        @using(Html.BeginForm()){
+            @Html.HiddenFor(m => m.Id)
+            <input type="submit" value="Cast Vote" />
+        }

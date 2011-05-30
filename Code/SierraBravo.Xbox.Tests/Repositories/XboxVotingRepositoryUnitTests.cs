@@ -37,7 +37,9 @@ namespace SierraBravo.Xbox.Tests.Repositories
         public void SetUp()
         {
             _mockVotingService = MockRepository.GenerateMock<XboxVotingServiceSoap>();
-            _xboxVotingRepository = new XboxVotingRepository(_mockVotingService);
+
+            // Can use any API key as it is not actually required in the mock voting service
+            _xboxVotingRepository = new XboxVotingRepository(_mockVotingService,"API_KEY");
         }
 
         /// <summary>
@@ -58,30 +60,33 @@ namespace SierraBravo.Xbox.Tests.Repositories
         [Test]
         public void GettingAllGamesSetsIsOwnedStatusToTrueWhenStatusEqualsGotItAndFalseOtherwise()
         {
-            _mockVotingService.Stub(xvs => xvs.GetGames(Arg<string>.Is.Anything)).Return(new []
-                                                                                              {
-                                                                                                  new XboxGame
-                                                                                                      {
-                                                                                                          Id = 1,
-                                                                                                          Status = "gotit",
-                                                                                                          Title = "test",
-                                                                                                          Votes = 1
-                                                                                                      },
-                                                                                                  new XboxGame
-                                                                                                      {
-                                                                                                          Id = 2,
-                                                                                                          Status = "dontgotit",
-                                                                                                          Title = "test2",
-                                                                                                          Votes = 1
-                                                                                                      },
-                                                                                                  new XboxGame
-                                                                                                      {
-                                                                                                          Id = 3,
-                                                                                                          Status = "notowned",
-                                                                                                          Title = "test3",
-                                                                                                          Votes = 1
-                                                                                                      }
-                                                                                              });
+            _mockVotingService
+                .Stub(xvs => 
+                        xvs.GetGames(Arg<string>.Is.Anything))
+                .Return(new []
+                        {
+                            new XboxGame
+                                {
+                                    Id = 1,
+                                    Status = "gotit",
+                                    Title = "test",
+                                    Votes = 1
+                                },
+                            new XboxGame
+                                {
+                                    Id = 2,
+                                    Status = "dontgotit",
+                                    Title = "test2",
+                                    Votes = 1
+                                },
+                            new XboxGame
+                                {
+                                    Id = 3,
+                                    Status = "notowned",
+                                    Title = "test3",
+                                    Votes = 1
+                                }
+                        });
 
             var games = _xboxVotingRepository.GetAllGames();
 

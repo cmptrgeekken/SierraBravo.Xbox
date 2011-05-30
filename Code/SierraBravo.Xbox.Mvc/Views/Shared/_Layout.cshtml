@@ -13,18 +13,32 @@
     <div id="navigation">
         <ul>
             <li><a href="@Url.Content("~/")">View Games</a></li>
+        @if( !ViewBag.ReadOnly ){
             <li><a href="@Url.Content("~/Add")">Add Game</a></li>
+        }
             <li><a href="@Url.Content("~/Clear")">Clear Database</a></li>
+            <li><a href="@Url.Content("~/Faq")">FAQ</a></li>
+            <li>
+                <span>
+                 
+            @if( ViewBag.NoActionReason == null ){
+                @Html.Raw(String.Format("<b>{0}</b> action{1} left for today",ViewBag.NumberOfActionsLeft,ViewBag.NumberOfActionsLeft!=1?"s":""))
+            }else
+            {
+                @ViewBag.NoActionReason
+            }
+                </span>
+            </li>
         </ul>
         <div style="clear:left"></div>
     </div>
     <div id="main">
-    @if(TempData["SuccessMessage"] != null){
-        <div class="message-success">@Html.Raw(TempData["SuccessMessage"] as string)</div>
+    @if(TempData["Success"] != null){
+        <div class="message-success">@Html.Raw(TempData["Success"] as string)</div>
     }
 
-    @if(TempData["ErrorMessage"] != null){
-        <div class="message-error">@Html.Raw(TempData["ErrorMessage"] as string)</div>
+    @if(TempData["Error"] != null){
+        <div class="message-error">@Html.Raw(TempData["Error"] as string)</div>
     }
     @RenderBody()
         <div style="clear:left"></div>

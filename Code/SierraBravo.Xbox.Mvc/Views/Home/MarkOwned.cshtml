@@ -2,9 +2,8 @@
 @{
     ViewBag.Title = "Mark as Owned";
 }
-
-<p>Click <b>Mark as Owned</b> to mark game <b>@Model.Title</b> as owned.</p>
-@using(Html.BeginForm()){
-    @Html.HiddenFor(m => m.Id)
-    <input type="submit" value="Mark as Owned" />
-}
+        <p>Click <b>Mark as Owned</b> to mark game <b>@Model.Title</b> as owned.</p>
+        @using(Html.BeginForm()){
+            @Html.HiddenFor(m => m.Id)
+            <input type="submit" value="Mark as Owned" />
+        }

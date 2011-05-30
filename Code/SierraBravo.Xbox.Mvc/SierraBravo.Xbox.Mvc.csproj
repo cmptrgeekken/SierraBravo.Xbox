@@ -39,6 +39,7 @@
     <Reference Include="Castle.Windsor">
       <HintPath>..\packages\Castle.Windsor.2.5.3\lib\NET40\Castle.Windsor.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Web.WebPages, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System" />
@@ -48,7 +49,10 @@
     <Reference Include="System.Configuration" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\UserContext.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Classes\RequiresActionAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -65,12 +69,6 @@
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Web.Debug.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </Content>
-    <Content Include="Web.Release.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </Content>
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
@@ -83,6 +81,7 @@
   <ItemGroup>
     <None Include="Views\Home\Add.cshtml" />
     <None Include="Views\Home\Clear.cshtml" />
+    <None Include="Views\Home\Faq.cshtml" />
     <None Include="Views\Home\Index.cshtml" />
     <None Include="Views\Home\MarkOwned.cshtml" />
     <None Include="Views\Home\Vote.cshtml" />
@@ -91,6 +90,10 @@
     <ProjectReference Include="..\SierraBravo.Xbox.Common\SierraBravo.Xbox.Common.csproj">
       <Project>{D71220A8-EC9D-4991-AD5B-C17948C85FDE}</Project>
       <Name>SierraBravo.Xbox.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SierraBravo.Xbox.Framework\SierraBravo.Xbox.Framework.csproj">
+      <Project>{F6AB0BBE-5B41-4279-B781-011E659CD094}</Project>
+      <Name>SierraBravo.Xbox.Framework</Name>
     </ProjectReference>
     <ProjectReference Include="..\SierraBravo.Xbox.Repositories\SierraBravo.Xbox.Repositories.csproj">
       <Project>{6A8CCFE8-AC9B-42E0-813D-01318A4F2026}</Project>

@@ -2,37 +2,42 @@
 @{
     ViewBag.Title = "Index";
 }
-
-<div id="left-column">
-    <h2>Owned Games</h2>
-    <div id="games-owned">
-@if(Model.OwnedGames.Count() > 0){
-    for(var i=0;i<Model.OwnedGames.Count();i++){
-        var game = Model.OwnedGames.ElementAt(i);
-        <div class="game-owned @(i%2==0?"row-alt":"row")">@game.Title</div>
-    }
-}else
-{
-        <div class="no-games">No games currently owned.</div>
-}
-    </div>
-</div>
-<div id="right-column">
-    <h2>Wanted Games</h2>
-    <div id="games-wanted">
-@if(Model.WantedGames.Count() > 0){
-    for(var i=0;i<Model.WantedGames.Count();i++){
-        var game = Model.WantedGames.ElementAt(i);
-        <div class="game-wanted @(i%2==0?"row-alt":"row")">
-            <a href="@Url.Action("MarkOwned",new{id = game.Id})" title="Mark Owned">←</a>
-            @Html.ActionLink("Vote","Vote", new { id = game.Id })
-            <code>(@game.NumberOfVotes)</code>
-            @game.Title
+        <div id="left-column">
+            <h2>Owned Games</h2>
+            <div id="games-owned">
+        @if(Model.OwnedGames.Count() > 0){
+            for(var i=0;i<Model.OwnedGames.Count();i++){
+                var game = Model.OwnedGames.ElementAt(i);
+                <div class="game-owned @(i%2==0?"row-alt":"row")">@game.Title</div>
+            }
+        }else
+        {
+                <div class="no-games">No games currently owned.</div>
+        }
+            </div>
         </div>
-    }
-}else
-{
-        <div class="no-games">No games currently wanted. @Html.ActionLink("Add one","Add")!</div>
-}
-    </div>
-</div>
+        <div id="right-column">
+            <h2>Wanted Games</h2>
+            <div id="games-wanted">
+        @if(Model.WantedGames.Count() > 0){
+            for(var i=0;i<Model.WantedGames.Count();i++){
+                var game = Model.WantedGames.ElementAt(i);
+                <div class="game-wanted @(i%2==0?"row-alt":"row")">
+                    <a href="@Url.Action("MarkOwned",new{id = game.Id})" title="Mark Owned">←</a> 
+                    @if( !ViewBag.ReadOnly ){
+                        <text> | </text>@Html.ActionLink("Vote","Vote", new { id = game.Id })
+                    }
+                    <code>(Votes: @game.NumberOfVotes)</code>
+                    @game.Title
+                </div>
+            }
+        }else
+        {
+                <div class="no-games">No games currently wanted. 
+                    @if( !ViewBag.ReadOnly ){
+                        @Html.ActionLink("Add one","Add")<text>!</text>
+                    }
+                </div>
+        }
+            </div>
+        </div>

@@ -1,27 +1,26 @@
-﻿using System;
+﻿/* This program is free software. It comes without any warranty, to
+ * the extent permitted by applicable law. You can redistribute it
+ * and/or modify it under the terms of the Do What The Fuck You Want
+ * To Public License, Version 2, as published by Sam Hocevar. See
+ * http://sam.zoy.org/wtfpl/COPYING for more details. */
+using System;
 using System.Linq;
 using System.Web.Mvc;
-using Castle.Windsor;
-using Castle.Windsor.Configuration.Interpreters;
+using System.Web.SessionState;
+using SierraBravo.Xbox.Mvc.Filters;
 using SierraBravo.Xbox.Mvc.Models;
 using SierraBravo.Xbox.Services.Interfaces;
 
 namespace SierraBravo.Xbox.Mvc.Controllers
 {
-    public class HomeController : Controller
-    {
-        private readonly IVideoGameVotingService _votingService;
-
-        public HomeController()
-        {
-            _votingService = new WindsorContainer(new XmlInterpreter()).Resolve<IVideoGameVotingService>();
-        }
-
+    [SessionState(SessionStateBehavior.Required)]
+    public class HomeController : BaseController<IVideoGameVotingService>
+    {       
         //
         // GET: /Home/
         public ActionResult Index()
         {
-            var allGames = _votingService.GetAllGames().OrderBy(g => g.Title);
+            var allGames = ControllerService.GetAllGames().OrderByDescending(g => g.NumberOfVotes);
             var ownedGames = allGames.Where(g => g.IsOwned);
             var wantedGames = allGames.Where(g => !g.IsOwned);
 
@@ -32,45 +31,41 @@ namespace SierraBravo.Xbox.Mvc.Controllers
                             });
         }
 
+        [RequiresAction(false)]
         public ActionResult Add()
         {
             return View(new VideoGameAddModel());
         }
 
-        [HttpPost]
+        [HttpPost,RequiresAction(true)]
         public ActionResult Add(VideoGameAddModel model)
         {
             ActionResult result = null;
             if (ModelState.IsValid)
             {
-                var success = _votingService.AddGame(model.Title.Trim());
+                var success = ControllerService.AddGame(model.Title.Trim());
                 if (success)
                 {
-                    SetSuccessMessage("Game added successfully.");
+                    SetSuccess("Game added successfully.");
 
-                    result = RedirectToAction("Add");
+                    result = RedirectToAction("Index");
                 }else
                 {
                     ModelState.AddModelError("Title", "Title already exists.");
                 }
             }
 
-
-            if( result == null )
-            {
-                result = View(model);
-            }
-
-            return result;
+            return result ?? View(model);
         }
-        
+
+        [RequiresAction(false)]
         public ActionResult Vote(int id)
         {
             ActionResult result;
-            var game = _votingService.GetGameById(id);
+            var game = ControllerService.GetGameById(id);
             if( game == null )
             {
-                SetErrorMessage("Game not found.");
+                SetError("Game not found.");
 
                 result = RedirectToAction("Index");
             }else
@@ -87,17 +82,16 @@ namespace SierraBravo.Xbox.Mvc.Controllers
         }
 
 
-        [HttpPost]
+        [HttpPost,RequiresAction(true)]
         public ActionResult Vote(VideoGameSubmitModel model)
         {
-            var success = _votingService.VoteForGame(model.Id);
+            var success = ControllerService.VoteForGame(model.Id);
             if( success )
             {
-                var game = _votingService.GetGameById(model.Id);
-                SetSuccessMessage("Vote successfully cast.");
+                SetSuccess("Vote successfully cast.");
             }else
             {
-                SetErrorMessage("Cannot vote for a game that's already owned.");
+                SetError("Cannot vote for a game that's already owned.");
             }
             return RedirectToAction("Index");
         }
@@ -105,10 +99,10 @@ namespace SierraBravo.Xbox.Mvc.Controllers
         public ActionResult MarkOwned(int id)
         {
             ActionResult result;
-            var game = _votingService.GetGameById(id);
+            var game = ControllerService.GetGameById(id);
             if (game == null)
             {
-                SetErrorMessage("Game not found.");
+                SetError("Game not found.");
 
                 result = RedirectToAction("Index");
             }
@@ -126,17 +120,19 @@ namespace SierraBravo.Xbox.Mvc.Controllers
             return result;
         }
 
+
         [HttpPost]
         public ActionResult MarkOwned(VideoGameSubmitModel model)
         {
-            var success = _votingService.MarkGameAsOwned(model.Id);
+            var success = ControllerService.MarkGameAsOwned(model.Id);
             if( success )
             {
-                var game = _votingService.GetGameById(model.Id);
-                SetSuccessMessage(String.Format("<b>{0}</b> marked as owned successfully.", game.Title));
+                var game = ControllerService.GetGameById(model.Id);
+                
+                SetSuccess(String.Format("<b>{0}</b> marked as owned successfully.", game.Title));
             }else
             {
-                SetErrorMessage("Cannot mark a game as owned more than once.");
+                SetError("Cannot mark a game as owned more than once.");
             }
             return RedirectToAction("Index");
         }
@@ -151,26 +147,28 @@ namespace SierraBravo.Xbox.Mvc.Controllers
         {
             if (txtConfirm == "confirm")
             {
-                var success = _votingService.ClearAllGames();
+                var success = ControllerService.ClearAllGames();
                 if( success )
                 {
-                    SetSuccessMessage("Games successfully cleared.");
+                    SetSuccess("Games successfully cleared.");
                 }else
                 {
-                    SetErrorMessage("Clearing games failed. Please try again later.");
+                    SetError("Clearing games failed. Please try again later.");
                 }
             }
             return RedirectToAction("Index");
         }
 
-        private void SetSuccessMessage(string message)
+        public ActionResult Faq()
         {
-            TempData["SuccessMessage"] = message;
+            return View();
         }
 
-        private void SetErrorMessage(string message)
+        private ActionResult ReadOnlyMessage()
         {
-            TempData["ErrorMessage"] = message;
+            SetError("Site is in read-only mode. Action forbidden.");
+
+            return RedirectToAction("Index");
         }
     }
 }
